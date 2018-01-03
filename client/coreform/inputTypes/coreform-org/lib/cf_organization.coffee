@@ -36,7 +36,7 @@ renderTree = (container,isSelf)->
       core:
         themes: { "stripes" : true },
         data:  (node, cb) ->
-          Session.set("cf_selectOrgId", node.id);
+          # Session.set("cf_selectOrgId", node.id);
           cb(CFDataManager.getNode(spaceId, node, isSelf));
         three_state: false
       conditionalselect: (node) ->

@@ -23,10 +23,10 @@ renderTree = (container,isSelf)->
 			data: (node, cb) ->
 				cb(CFDataManager.getNode(spaceId, node, isSelf, true));
 
-				if node.id != '#'
-					Session.set("cf_selectOrgId", node.id);
-					Session.set("cf_space", node.data.spaceId);
-					Session.set("cf_orgAndChild", CFDataManager.getOrgAndChild(node, Session.get("cf_selectOrgId")));
+				# if node.id != '#'
+					# Session.set("cf_selectOrgId", node.id);
+					# Session.set("cf_space", node.data.spaceId);
+					# Session.set("cf_orgAndChild", CFDataManager.getOrgAndChild(node, Session.get("cf_selectOrgId")));
 		plugins: ["wholerow"]
 
 

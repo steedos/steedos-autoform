@@ -12,6 +12,7 @@ CFDataManager.getNode = function (spaceId, node, isSelf, isNeedtoSelDefault) {
 			if(selfOrganization){
 				orgs = [selfOrganization];
 				orgs[0].open = true;
+				orgs[0].select = true;
 			}
 		}
 		else if (myContactsLimit && myContactsLimit.isLimit) {
@@ -40,8 +41,13 @@ CFDataManager.getNode = function (spaceId, node, isSelf, isNeedtoSelDefault) {
 			}
 			// 这里故意重新抓取后台数据，因为前台无法正确排序
 			orgs = CFDataManager.getOrganizationsByIds(_ids);
-			if (orgs.length > 0 && !selfOrganization) {
+			if (orgs.length > 0) {
 				orgs[0].open = true;
+				orgs[0].select = true;
+				// 有主要部门的时候不应该再选中根节点
+				if (selfOrganization){
+					orgs[0].select = false;
+				}
 			}
 		} else {
 			orgs = CFDataManager.getRoot(spaceId);
@@ -49,9 +55,13 @@ CFDataManager.getNode = function (spaceId, node, isSelf, isNeedtoSelDefault) {
 			if(selfOrganization && selfOrganization._id == orgs[0]._id){
 				orgs = []
 			}
-			else if(!selfOrganization){
-				// 有主要部门的时候不应该再选中展开根节点
+			else{
 				orgs[0].open = true;
+				orgs[0].select = true;
+				// 有主要部门的时候不应该再选中根节点
+				if (selfOrganization) {
+					orgs[0].select = false;
+				}
 			}
 		}
 	}
@@ -95,7 +105,7 @@ function handerOrg(orgs, parentId, isNeedtoSelDefault) {
 
 		if (org.open == true) {
 			node.state.opened = true;
-			if(isNeedtoSelDefault && CFDataManager.getOrganizationModalValue().length === 0){
+			if (isNeedtoSelDefault && org.select && CFDataManager.getOrganizationModalValue().length === 0){
 				node.state.selected = true;
 			}
 		} else {
