@@ -91,6 +91,8 @@ Package.onUse(function(api) {
 	api.addFiles('client/coreform/inputTypes/coreform-typeahead/af-typeahead.less', 'client');
 	api.addFiles('client/coreform/inputTypes/coreform-typeahead/af-typeahead.html', 'client');
 	api.addFiles('client/coreform/inputTypes/coreform-typeahead/af-typeahead.coffee', 'client');
+	api.addFiles('client/coreform/inputTypes/coreform-number/steedos-number.html', 'client');
+	api.addFiles('client/coreform/inputTypes/coreform-number/steedos-number.coffee', 'client');
 
 	api.addFiles('routes/formula_space_users.coffee', 'server');
 	api.addFiles('routes/formula_organizations.coffee', 'server');
