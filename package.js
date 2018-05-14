@@ -3,7 +3,7 @@
  */
 Package.describe({
 	name: 'steedos:autoform',
-	version: '0.0.11',
+	version: '0.0.12',
 	summary: 'Steedos libraries',
 	git: 'https://github.com/steedos/apps/tree/master/packages/steedos-autoform',
 	documentation: null
@@ -33,7 +33,7 @@ Package.onUse(function(api) {
 	api.use('aldeed:simple-schema@1.5.3');
 	api.use('aldeed:tabular@1.6.1');
 	api.use('aldeed:autoform@5.8.0');
-	api.use('steedos:momentjs-moment@2.14.1');
+	api.use('momentjs:moment@2.14.1');
 	api.use('simple:json-routes@2.1.0');
 
 	api.use('steedos:jstree@3.3.2')
