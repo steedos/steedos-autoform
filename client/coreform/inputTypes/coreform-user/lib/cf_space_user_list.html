@@ -6,7 +6,7 @@
                  <input type="text" name="cf-contact-list-search-key" id="cf-contact-list-search-key" class="form-control cf-contact-list-search-key" placeholder='{{_ "Search"}}...'>
             </div>
 			<div class="box-body">
-				{{> tabular table=TabularTables.cf_tabular_space_user selector=(selector userOptions) class="table table-striped table-condensed cf_space_user_list_table"}}
+				{{> tabular table=TabularTables.cf_tabular_space_user selector=(selector userOptions filters) class="table table-striped table-condensed cf_space_user_list_table"}}
 			</div>
 			<!-- /.box-body -->
 			<!-- Loading (remove the following to stop the loading)-->

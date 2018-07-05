@@ -563,3 +563,48 @@ CFDataManager.getFormulaOrganizations = function (orgIds, space) {
 CFDataManager.getFormulaOrganization = function (orgId, space) {
 	return _.first(SteedosDataManager.getFormulaOrganizations([orgId]), space)
 }
+
+CFDataManager.formatFiltersToMongo = function(filters) {
+	var selector;
+	if (!filters.length) {
+		return;
+	}
+	if (!(filters[0] instanceof Array)) {
+		filters = _.map(filters, function(obj) {
+			return [obj.field, obj.operation, obj.value];
+		});
+	}
+	selector = [];
+	_.each(filters, function(filter) {
+		var field, option, reg, sub_selector, value;
+		field = filter[0];
+		option = filter[1];
+		value =  filter[2];
+		sub_selector = {};
+		sub_selector[field] = {};
+		if (option === "=") {
+			sub_selector[field]["$eq"] = value;
+		} else if (option === "<>") {
+			sub_selector[field]["$ne"] = value;
+		} else if (option === ">") {
+			sub_selector[field]["$gt"] = value;
+		} else if (option === ">=") {
+			sub_selector[field]["$gte"] = value;
+		} else if (option === "<") {
+			sub_selector[field]["$lt"] = value;
+		} else if (option === "<=") {
+			sub_selector[field]["$lte"] = value;
+		} else if (option === "startswith") {
+			reg = new RegExp("^" + value, "i");
+			sub_selector[field]["$regex"] = reg;
+		} else if (option === "contains") {
+			reg = new RegExp(value, "i");
+			sub_selector[field]["$regex"] = reg;
+		} else if (option === "notcontains") {
+			reg = new RegExp("^((?!" + value + ").)*$", "i");
+			sub_selector[field]["$regex"] = reg;
+		}
+		return selector.push(sub_selector);
+	});
+	return selector;
+};

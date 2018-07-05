@@ -24,11 +24,21 @@ Template.cf_space_user_list.onDestroyed ->
 	Session.set("cf_contact_list_search", false)
 
 Template.cf_space_user_list.helpers
-	selector: (userOptions)->
+	selector: (userOptions, filters)->
+		console.log('selector filters', filters)
 		spaceId = Template.instance().data.spaceId || Session.get("cf_space")
 		myContactsLimit = Steedos.my_contacts_limit
 
 		query = {space: spaceId, user_accepted: true};
+
+		if filters
+			filtersQuerys = CFDataManager.formatFiltersToMongo(filters)
+
+			_.forEach(filtersQuerys, (q)->
+				_.extend(query, q)
+			)
+		else
+			_.extend(query, {profile: {$ne: 'member'}})
 
 		unselectable_users = Template.instance().data.unselectable_users
 

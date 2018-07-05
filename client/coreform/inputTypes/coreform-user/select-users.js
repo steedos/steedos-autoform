@@ -152,6 +152,8 @@ Template.afSelectUser.events({
 
         options.userOptions = template.data.atts.userOptions || null
 
+		options.filters = template.data.atts.filters;
+
         // options.userOptions = dataset.userOptions || template.data.atts.userOptions || null
 
         if (dataset.userOptions != undefined && dataset.userOptions != null) {
